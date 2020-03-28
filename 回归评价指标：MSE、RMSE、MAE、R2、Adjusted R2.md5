@@ -1,0 +1,51 @@
+我们通常采用MSE、RMSE、MAE、R2来评价回归预测算法。
+
+1、均方误差：MSE（Mean Squared Error）
+
+
+其中，为测试集上真实值-预测值。
+
+2、均方根误差：RMSE（Root Mean Squard Error）
+
+
+可以看出，RMSE=sqrt（MSE）。
+
+3、平均绝对误差：MAE（Mean Absolute Error）
+
+
+以上各指标，根据不同业务，会有不同的值大小，不具有可读性，因此还可以使用以下方式进行评测。
+
+4、决定系数：R2（R-Square）
+
+
+其中，分子部分表示真实值与预测值的平方差之和，类似于均方差 MSE；分母部分表示真实值与均值的平方差之和，类似于方差 Var。
+
+根据 R-Squared 的取值，来判断模型的好坏，其取值范围为[0,1]：
+
+如果结果是 0，说明模型拟合效果很差；
+
+如果结果是 1，说明模型无错误。
+
+一般来说，R-Squared 越大，表示模型拟合效果越好。R-Squared 反映的是大概有多准，因为，随着样本数量的增加，R-Square必然增加，无法真正定量说明准确程度，只能大概定量。
+
+5、校正决定系数（Adjusted R-Square）
+
+
+其中，n 是样本数量，p 是特征数量。
+
+Adjusted R-Square 抵消样本数量对 R-Square的影响，做到了真正的 0~1，越大越好。
+
+python中可以直接调用
+
+from sklearn.metrics import mean_squared_error #均方误差
+from sklearn.metrics import mean_absolute_error #平方绝对误差
+from sklearn.metrics import r2_score#R square
+#调用
+MSE：mean_squared_error(y_test,y_predict)
+RMSE:np.sqrt(mean_squared_error(y_test,y_predict))
+MAE：mean_absolute_error(y_test,y_predict)
+R2：r2_score(y_test,y_predict)
+Adjusted_R2：:1-((1-r2_score(y_test,y_predict))*(n-1))/(n-p-1)
+————————————————
+版权声明：本文为CSDN博主「浅笑古今」的原创文章，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接及本声明。
+原文链接：https://blog.csdn.net/u012735708/article/details/84337262
